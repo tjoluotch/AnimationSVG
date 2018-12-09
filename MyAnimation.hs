@@ -13,6 +13,19 @@ picture =
     triTealLTR
     `plus`
     triTealRTL
+    `plus`
+    withPaint (cycleSmooth 2 [red,green, blue])
+        (combine 
+            [translate (always (a,200))
+                (rotate (spinner 2) ctrlPiece) | a <- [350,340..100]])
+    `plus`     
+    withPaint (cycleSmooth 2 [red,green, blue])
+        (combine 
+            [translate (always (a,200))
+                (rotate (spinner w) ctrlPiece) | a <- [380,390..600], w <- [-2]])
+    
+    
+
 
  -- List Function that increments from 0 up to 800 in 50's               
 listA :: [Length]
@@ -54,6 +67,9 @@ triLimeRTL =
                 (leftTri))) |
               a <- [0,200..600]])
 
+ctrlPiece :: Animation
+ctrlPiece =
+    polygon[(75,25), (125,25), (75,75), (125,75)]
 
 
 -- func of type Animation which is right to left movment of teal triangles    
@@ -79,7 +95,8 @@ triTealLTR =
             (withPaint (always teal) 
                 (rightTri))) |
               a <- [100,300..500]])
-              
+
+-- (rotate (spinner 2) ctrlPiece)   test with this later            
  
 test :: IO ()
 test = writeFile "test.svg" (svg 800 600 picture)
