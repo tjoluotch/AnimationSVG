@@ -23,8 +23,18 @@ picture =
         (combine 
             [translate (always (a,200))
                 (rotate (spinner w) ctrlPiece) | a <- [380,390..600], w <- [-2]])
-    
-    
+    `plus`
+    translate (always (500,200))
+        (rotate (always 90)
+            (scale (cycleSmooth 4 [(1.5, 4), (4, 1.5)])
+                (withPaint (cycleSmooth 2 [fuchsia, purple])
+                    ctrlPiece)))
+    `plus`
+    translate (always (700,200))
+        (rotate (always 90)
+            (scale (cycleSmooth 4 [(1.5, 4), (4, 1.5)])
+                (withPaint (cycleSmooth 2 [purple, fuchsia])
+                    ctrlPiece)))            
 
 
  -- List Function that increments from 0 up to 800 in 50's               
@@ -67,6 +77,7 @@ triLimeRTL =
                 (leftTri))) |
               a <- [0,200..600]])
 
+-- func of type Animation which is the centre set of rotating triangles              
 ctrlPiece :: Animation
 ctrlPiece =
     polygon[(75,25), (125,25), (75,75), (125,75)]
